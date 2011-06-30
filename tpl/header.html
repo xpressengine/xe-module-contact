@@ -1,0 +1,28 @@
+<!--%import("js/contact_admin.js")-->
+
+<h3 class="xeAdmin"><span class="gray">{$lang->contact_management}</span></h3>
+
+<div class="infoText">{nl2br($lang->about_contact)}</div>
+
+<!--@if($module_info)-->
+<div class="header4">
+    <!--@if($module_info->mid)-->
+    <h4 class="xeAdmin">{$module_info->mid} <!--@if($module_info->is_default=='Y')--><span class="bracket">({$lang->is_default})</span><!--@end--> <span class="vr">|</span> <a href="{getSiteUrl($module_info->domain,'','mid',$module_info->mid)}" onclick="window.open(this.href); return false;" class="view">View</a></h4>
+    <!--@end-->
+
+    <ul class="localNavigation">
+        <!--@if($module=='admin')-->
+        <li <!--@if($act=='dispContactAdminContent')-->class="on"<!--@end-->><a href="{getUrl('act','dispContactAdminContent','module_srl','')}">{$lang->cmd_contact_list}</a></li>
+        <!--@else-->
+        <li><a href="{getUrl('act','')}">{$lang->cmd_back}</a></li>
+        <!--@end-->
+        <li <!--@if($act=='dispContactAdminContactInfo'||$act=='dispContactAdminInsertContact')-->class="on"<!--@end-->><a href="{getUrl('act','dispContactAdminContactInfo','type','')}"><!--@if($module_srl)-->{$lang->cmd_view_info}<!--@else-->{$lang->cmd_create_contact}<!--@end--></a></li>
+
+        <!--@if($module_srl)-->
+        <li <!--@if($act=='dispContactAdminFormComps')-->class="on"<!--@end-->><a href="{getUrl('act','dispContactAdminFormComps','type','')}">{$lang->cmd_form_components}</a></li>
+        <li <!--@if($act=='dispContactAdminContactAdditionSetup')-->class="on"<!--@end-->><a href="{getUrl('act','dispContactAdminContactAdditionSetup','type','')}">{$lang->cmd_addition_setup}</a></li>
+		<!--@end-->
+    </ul>
+</div>
+<!--@end-->
+

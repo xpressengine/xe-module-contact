@@ -1,0 +1,15 @@
+<filter name="send_email" module="contact" act="procContactSendEmail">
+    <form>
+        <node target="Comment" required="true"/>
+		<node target="Email" required="true"/>
+		<node target="Subject" required="true"/>
+    </form>
+	<parameter>
+        <param name="mid" target="mid" />
+    </parameter>
+    <response callback_func="completeSendEmail">
+		<tag name="error" />
+		<tag name="message" />
+		<tag name="mid" />
+    </response>
+</filter>

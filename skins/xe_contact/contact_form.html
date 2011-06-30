@@ -1,0 +1,96 @@
+<script type="text/javascript">
+	jQuery(function($){
+		$('#formComponents input:text').css('width','500px');
+		$('#formComponents textarea').css('width','500px');
+		$('#formComponents textarea').css('height','80px');
+		$('#formComponents textarea').css('font-size','11px');
+		$('#comment_field textarea').css('width','575px');
+		$('#comment_field textarea').css('font-size','11px');
+		$('#comment_field textarea').css('height','200px');
+
+	});
+</script>
+
+<input type="hidden" name="mid" value="{$mid}" />
+<input type="hidden" name="module_srl" value="{$module_info->module_srl}" />
+<div id="contact_form">
+	<div class="formTitle">
+		<p class="text-required">
+			<img height="12" width="12" src="img/bg-star-required.gif" alt="">Fields are required
+		</p>
+	</div>
+	<div>
+		<table id="formComponents">
+			<tbody>
+				<!--@if(count($form_extra_keys))-->
+					<!--@foreach($form_extra_keys as $key => $val)-->
+						<tr id="form_keys_{$key}" class="extraVarsList">
+							<td class="labelcol">
+								<div>
+									<!--@if($val->is_required=='Y')--><img src="img/bg-star-required.gif"><!--@end-->
+									<label>{$val->name}:</label>
+								</div>
+							</td>
+							<td class="inputcol">
+								<div>
+									{$val->getFormHTML()}
+								</div>
+							</td>
+						</tr>
+					<!--@endforeach-->
+				<!--@endif-->
+				<tr class="mandatory_field">
+					<td class="labelcol">
+						<div>
+							<img src="img/bg-star-required.gif">
+							<label>Subject:</label>
+						</div>
+					</td>
+					<td class="inputcol">
+						<div>
+							<input class="text" type="text" name="Subject">
+						</div>
+	
+					</td>
+				</tr>
+				<tr class="mandatory_field">
+					<td class="labelcol">
+						<div>
+							<img src="img/bg-star-required.gif">
+							<label>Email:</label>
+						</div>
+					</td>
+					<td class="inputcol">
+						<div>
+							<input class="text" type="text" name="Email">
+						</div>
+	
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<table id="comment_field">
+			<tr>
+				<td class="labelcol">
+					<div>
+						<label>Question and Comment:</label>
+					 </div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" class="widgetcol colspan_1">
+					<div>
+						<textarea class="textarea" name="Comment"></textarea>
+					</div><!-- widget -->
+				</td>
+			</tr><!--field ( Question )-->
+		</table>
+	</div>
+</div>
+<span class="button red strong"><input type="submit" value="Send"></span>
+
+
+

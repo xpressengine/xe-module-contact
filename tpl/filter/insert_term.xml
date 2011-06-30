@@ -1,0 +1,10 @@
+<filter name="insert_term" module="contact" act="procContactInsertTerm">
+  <form>
+    <node target="term"/>
+  </form>
+  <response callback_func="completeTermInserted">
+    <tag name="error" />
+    <tag name="message" />
+    <tag name="mid" />
+  </response>
+</filter>

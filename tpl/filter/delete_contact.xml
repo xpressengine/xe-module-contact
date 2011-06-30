@@ -1,0 +1,10 @@
+<filter name="delete_contact" module="contact" act="procContactAdminDeleteContact">
+    <form>
+        <node target="module_srl" required="true" />
+    </form>
+    <response callback_func="completeDeleteContact">
+        <tag name="error" />
+        <tag name="message" />
+        <tag name="page" />
+    </response>
+</filter>

@@ -1,0 +1,23 @@
+<filter name="insert_contact" module="contact" act="procContactAdminInsertContact" confirm_msg_code="confirm_submit">
+    <form>
+        <node target="mid" required="true" maxlength="40" filter="alpha_number" />
+        <node target="browser_title" required="true" maxlength="250" />
+    </form>
+    <parameter>
+        <param name="contact_name" target="mid" />
+        <param name="module_srl" target="module_srl" />
+        <param name="module_category_srl" target="module_category_srl" />
+        <param name="layout_srl" target="layout_srl" />
+        <param name="skin" target="skin" />
+        <param name="browser_title" target="browser_title" />
+        <param name="description" target="description" />
+    </parameter>
+    <response callback_func="completeInsertContact">
+        <tag name="error" />
+        <tag name="message" />
+        <tag name="module" />
+        <tag name="act" />
+        <tag name="page" />
+        <tag name="module_srl" />
+    </response>
+</filter>

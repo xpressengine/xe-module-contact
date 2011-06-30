@@ -1,0 +1,20 @@
+<!--#include("header.html")-->
+
+{$setup_content}
+
+<script type="text/javascript">
+	jQuery(function($){
+		th = $('th.half_wide div');
+		th_article = th[0]
+		th_comment = th[1];
+		$(th_comment).hide();
+		$("[name='comment_editor_skin']").hide();
+		$("[name='sel_comment_editor_colorset']").hide();
+		$("[name='comment_content_style']").hide();
+		$("[name='comment_editor_height']").parent('td').hide();
+		$("#enable_comment_html_3").parent('td').hide();
+		$("#comment_fileupload_3").parent('td').hide();
+		$("#comment_default_component_3").parent('td').hide();
+		$("#comment_component_3").parent('td').hide();
+	});
+</script>
