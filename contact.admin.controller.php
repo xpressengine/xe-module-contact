@@ -30,6 +30,10 @@
 			// set up addtional variables
 			if($args->enable_terms!='Y') $args->enable_terms = 'N';
 			$args->admin_mail = trim($args->admin_mail);
+			$args->interval = (int) $args->interval;
+
+			if(!is_numeric($args->interval))
+				$args->interval = 0;
 
 			// if module_srl exists
             if($args->module_srl) {

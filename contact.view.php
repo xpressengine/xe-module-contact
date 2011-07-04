@@ -7,11 +7,11 @@
 
     class contactView extends contact {
 
+
         /**
          * @brief initialize contact view class.
          **/
 		function init() {
-
            /**
              * get skin template_path
              * if it is not found, default skin is xe_contact
@@ -29,7 +29,7 @@
             $oDocumentModel = &getModel('document');
             $form_extra_keys = $oDocumentModel->getExtraKeys($this->module_info->module_srl);
             Context::set('form_extra_keys', $form_extra_keys);
-
+			
 
 			// load contact.js
 			Context::addJsFile($this->module_path.'tpl/js/contact.js');	
@@ -74,8 +74,25 @@
             $this->setTemplateFile('write_term_form');
 
 		}
-     
-	  function getTermText($strlen = 0) {
+
+		function dispCompleteSendMail() {
+
+			if(isset($_SESSION['mail_content'])){
+				$mail_content = $_SESSION['mail_content'];
+				Context::set('mail_content',$mail_content);
+
+			}else{
+				Context::set('mail_content','');
+				$url = getUrl('mid',$this->mid,'act','');
+				header('Location: '.$url);
+			}
+
+			unset($_SESSION['mail_content']);
+
+			$this->setTemplateFile('success_form');
+		}
+
+		function getTermText($strlen = 0) {
             if(!$this->module_info->module_srl) return;
 
 			$term = $this->module_info->content;
@@ -83,7 +100,7 @@
 			if($strlen) return cut_str(strip_tags($term),$strlen,'...');
 
 			return htmlspecialchars($term);
-	  }
+		}
 
     }
 

@@ -19,6 +19,7 @@
         <action name="dispContactAdminContactAdditionSetup" type="view" standalone="true" />
         <action name="dispContactContent" type="view" index="true" />
 	    <action name="dispContactTermWrite" type="view" />
+		<action name="dispCompleteSendMail" type="view" />
 
 		<action name="procContactAdminInsertContact" type="controller" standalone="true" />
         <action name="procContactAdminInsertExtraVar" type="controller" standalone="true" />

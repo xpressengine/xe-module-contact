@@ -19,8 +19,8 @@ function completeSendEmail(ret_obj) {
     var message = ret_obj['message'];
     var mid = ret_obj['mid'];
     var url;
-    url = current_url.setQuery('mid',mid).setQuery('act','');
-	alert("Send an Email successed!");
+    url = current_url.setQuery('mid',mid).setQuery('act','dispCompleteSendMail');
+
     location.href = url;
 }
 

@@ -23,7 +23,6 @@
 	$lang->input_type_list['select'] = 'Select Box (single selection)';
 	$lang->input_type_list['checkbox'] = 'Checkbox (multiple selection)';
 	$lang->input_type_list['radio'] = 'Radio Button (radio)';
-	$lang->input_type_list['email_address'] = 'Email';
 	$lang->input_type_list['tel'] = 'Phone Number';
 	$lang->input_type_list['date'] = 'Date (yyyy/mm/dd)';
 
@@ -35,4 +34,8 @@
 	$lang->admin_mail = 'Administrator\'s Mail';
 	$lang->about_admin_mail	= 'Multiple mails can be sent with commas(,).';
 	$lang->components_count = "Form Components";
+
+	$lang->interval = 'Interval for spam filtering';
+	$lang->about_interval = 'All mails within the assigned time will be blocked.';
+	$lang->msg_alert_limited_by_config_mail = 'Sending an email within %s second is not allowed.';
 ?>

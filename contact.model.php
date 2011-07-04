@@ -42,5 +42,25 @@
             return count($extra_keys);
         }
 
+        /**
+         * @brief check spam interval
+         **/
+        function checkLimited($interval) {
+			if(!$interval) return new Object();
+
+			$oSpamModel = &getModel('spamfilter');
+			$count = $oSpamModel->getLogCount($interval);
+			
+            if($count) {
+                $message = sprintf(Context::getLang('msg_alert_limited_by_config_mail'), $interval);
+                $oSpamFilterController = &getController('spamfilter');
+                $oSpamFilterController->insertLog();
+
+                return new Object(-1, $message);
+            }
+			
+			return new Object();
+        }
+
     }
 ?>

@@ -79,6 +79,13 @@
         </td>
     </tr>
     <tr>
+        <th scope="col"><div>{$lang->interval}</div></th>
+        <td>
+            <input type="text" name="interval" value="{$module_info->interval}" class="inputTypeText" /> {$lang->unit_sec}
+            <p>{$lang->about_interval}</p>
+        </td>
+    </tr>
+    <tr>
         <th scope="row"><div>{$lang->description}</div></th>
         <td>
             <textarea name="description" class="inputTypeTextArea fullWidth">{htmlspecialchars($module_info->description)}</textarea>
