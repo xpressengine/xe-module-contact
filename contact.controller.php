@@ -14,58 +14,6 @@ class contactController extends contact {
 	}
 
 	/**
-	 * @brief insert/update agreement term 
-	 **/
-	function procContactInsertTerm() {
-
-		// check permission
-		if($this->module_info->module != "contact") return new Object(-1, "msg_invalid_request");
-        $logged_info = Context::get('logged_info');
-
-		// get form variables submitted
-		$obj = Context::getRequestVars();
-		$obj->module_srl = $this->module_srl;
-		
-		$oModuleModel = &getModel('module');
-		$mExtraVars = $oModuleModel->getModuleExtraVars($obj->module_srl);
-
-		//get exist extra variables
-		$obj->enable_terms = $mExtraVars[$obj->module_srl]->enable_terms;
-		$obj->admin_mail = $mExtraVars[$obj->module_srl]->admin_mail;
-
-		//save term to mudule table content column
-		if($obj->term) 
-			$obj->content = $obj->term;
-		else 
-			$obj->content = "";
-
-		unset($obj->term);
-
-		//save agree_text to mudule table mcontent column 
-		if($obj->agree_text) 
-			$obj->mcontent = $obj->agree_text;
-		else 
-			$obj->mcontent = "";
-
-		unset($obj->agree_text);
-		
-		$oModuleController = &getController('module');
-
-		if($obj->module_srl) {
-			$output = $oModuleController->updateModule($obj);
-			$msg_code = 'success_updated';
-			// if there is an error, then stop
-			if(!$output->toBool()) return $output;
-		}
-		
-		// return result
-		$this->add('mid', Context::get('mid'));
-
-		// output success inserted/updated message
-		$this->setMessage($msg_code);
-	}
-
-	/**
 	 * @brief send email 
 	 **/
 	function procContactSendEmail(){
@@ -137,6 +85,8 @@ class contactController extends contact {
 					$moduleExtraVars = $oModuleModel->getModuleExtraVars($this->module_info->module_srl);
 					if($moduleExtraVars[$this->module_info->module_srl]->interval){
 						$interval = $moduleExtraVars[$this->module_info->module_srl]->interval;
+						//transfer interval to mins
+						$interval = $interval*60;
 						$oContactModel = &getModel('contact');
 						$output = $oContactModel->checkLimited($interval);	
 						if(!$output->toBool()) return $output;

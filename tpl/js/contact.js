@@ -4,16 +4,6 @@
  * @brief  contact module template javascript
  **/
 
-/* after term inserted */
-function completeTermInserted(ret_obj) {
-    var error = ret_obj['error'];
-    var message = ret_obj['message'];
-    var mid = ret_obj['mid'];
-    var url;
-    url = current_url.setQuery('mid',mid).setQuery('act','');
-    location.href = url;
-}
-
 function completeSendEmail(ret_obj) {
     var error = ret_obj['error'];
     var message = ret_obj['message'];

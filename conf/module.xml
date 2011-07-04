@@ -5,9 +5,10 @@
 		<permission action="dispContactAdminContactInfo" target="manager" />
 		<permission action="dispContactAdminFormComps" target="manager" />
         <permission action="dispContactAdminContactAdditionSetup" target="manager" />
-
+        <permission action="dispContactAdminContactAgreement" target="manager" />
 		<permission action="procContactAdminInsertContact" target="manager" />
-		<permission action="procContactInsertTerm" target="member" />
+		<permission action="procContactAdminInsertTerm" target="manager" />
+		
 		<permission action="procContactSendEmail" target="member" />
     </permissions>
     <actions>
@@ -17,6 +18,7 @@
 		<action name="dispContactAdminDeleteContact" type="view" standalone="true" />
 	    <action name="dispContactAdminFormComps" type="view" standalone="true" />
         <action name="dispContactAdminContactAdditionSetup" type="view" standalone="true" />
+        <action name="dispContactAdminContactAgreement" type="view" standalone="true" />
         <action name="dispContactContent" type="view" index="true" />
 	    <action name="dispContactTermWrite" type="view" />
 		<action name="dispCompleteSendMail" type="view" />
@@ -25,7 +27,7 @@
         <action name="procContactAdminInsertExtraVar" type="controller" standalone="true" />
 		<action name="procContactAdminDeleteExtraVar" type="controller" standalone="true" />
 		<action name="procContactAdminDeleteContact" type="controller" standalone="true" />
-		<action name="procContactInsertTerm" type="controller" />
+		<action name="procContactAdminInsertTerm" type="controller" standalone="true" />
 		<action name="procContactSendEmail" type="controller" />
 
     </actions>

@@ -67,4 +67,20 @@ function doCartSetup(url) {
     popopen(url,'modulesSetup');
 }
 
+/* after term inserted */
+function completeTermInserted(ret_obj) {
+
+	var error = ret_obj['error'];
+    var message = ret_obj['message'];
+
+    var page = ret_obj['page'];
+    var module_srl = ret_obj['module_srl'];
+
+    alert(message);
+
+    var url = current_url.setQuery('act','dispContactAdminContactAgreement');
+    if(module_srl) url = url.setQuery('module_srl',module_srl);
+    if(page) url.setQuery('page',page);
+    location.href = url;
+}
 

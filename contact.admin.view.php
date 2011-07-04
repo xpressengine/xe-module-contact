@@ -147,6 +147,31 @@
 		}
 
         /**
+        * @brief display contact Agreement Term admin page
+		**/
+        function dispContactAdminContactAgreement() {
+
+			// only admin user can write contact term
+			if(!Context::get('is_logged'))  return $this->setTemplateFile('input_password_form');
+            $logged_info = Context::get('logged_info');
+            if($logged_info->is_admin != 'Y') return $this->setTemplateFile('input_password_form');
+
+			$oContactModel = &getModel('contact');
+			$editor_content = $oContactModel->getEditor($this->module_info->module_srl);
+			Context::set('editor_content', $editor_content);
+
+            /** 
+             * add javascript filter file insert_question
+             **/
+			$termText = $this->getTermText();
+			Context::set('termText', $termText);
+
+            Context::addJsFilter($this->module_path.'tpl/filter', 'insert_term.xml');
+
+			$this->setTemplateFile('agreement_term');
+		}
+
+        /**
          * @brief display delete contact module page
          **/
         function dispContactAdminDeleteContact() {
@@ -166,6 +191,16 @@
             // set template file
             $this->setTemplateFile('contact_delete');
         }
+
+		function getTermText($strlen = 0) {
+            if(!$this->module_info->module_srl) return;
+
+			$term = $this->module_info->content;
+
+			if($strlen) return cut_str(strip_tags($term),$strlen,'...');
+
+			return htmlspecialchars($term);
+		}
           
 
     }

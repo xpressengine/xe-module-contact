@@ -46,6 +46,7 @@
 	width: 100%;
 	min-width:630px;
 	overflow: hidden;
+	margin-bottom: 30px;
 }
 
 #terms-main p{

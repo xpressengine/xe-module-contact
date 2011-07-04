@@ -1,4 +1,5 @@
 <!--%import("js/contact_admin.js")-->
+<!--%import("css/contact_admin.css")-->
 
 <h3 class="xeAdmin"><span class="gray">{$lang->contact_management}</span></h3>
 
@@ -20,6 +21,7 @@
 
         <!--@if($module_srl)-->
         <li <!--@if($act=='dispContactAdminFormComps')-->class="on"<!--@end-->><a href="{getUrl('act','dispContactAdminFormComps','type','')}">{$lang->cmd_form_components}</a></li>
+		<li <!--@if($act=='dispContactAdminContactAgreement')-->class="on"<!--@end-->><a href="{getUrl('act','dispContactAdminContactAgreement','type','')}">{$lang->cmd_agreement}</a></li>
         <li <!--@if($act=='dispContactAdminContactAdditionSetup')-->class="on"<!--@end-->><a href="{getUrl('act','dispContactAdminContactAdditionSetup','type','')}">{$lang->cmd_addition_setup}</a></li>
 		<!--@end-->
     </ul>

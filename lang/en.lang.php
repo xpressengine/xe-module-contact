@@ -14,6 +14,7 @@
 	$lang->cmd_create_contact = 'Create a new Contact Us';
     $lang->cmd_view_info = 'Contact Us Info';
 	$lang->cmd_form_components = 'Form Extra Components';
+	$lang->cmd_agreement = 'Agreement Term';
 	$lang->form_comps = 'Form Extra Components';
 	$lang->eid = 'Name of Form Component';
 	$lang->input_type = 'Input Type';
@@ -37,5 +38,5 @@
 
 	$lang->interval = 'Interval for spam filtering';
 	$lang->about_interval = 'All mails within the assigned time will be blocked.';
-	$lang->msg_alert_limited_by_config_mail = 'Sending an email within %s second is not allowed.';
+	$lang->msg_alert_limited_by_config_mail = 'Sending an email within %s minute is not allowed.';
 ?>

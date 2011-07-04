@@ -135,5 +135,64 @@
             $this->setMessage('success_deleted');
         }
 
+		/**
+		 * @brief insert/update agreement term 
+		 **/
+		function procContactAdminInsertTerm() {
+
+			// check permission
+			if($this->module_info->module != "contact") return new Object(-1, "msg_invalid_request");
+			$logged_info = Context::get('logged_info');
+
+			$module_srl = Context::get('module_srl');
+			$term = Context::get('term');
+			$agree_text = Context::get('agree_text');
+
+
+			$obj->mid = Context::get('contact_name');
+			$obj->module_srl = $module_srl;
+			$obj->term = $term;
+			$obj->agree_text = $agree_text;
+
+			
+			$oModuleModel = &getModel('module');
+			$mExtraVars = $oModuleModel->getModuleExtraVars($obj->module_srl);
+
+			//get exist extra variables
+			$obj->enable_terms = $mExtraVars[$obj->module_srl]->enable_terms;
+			$obj->admin_mail = $mExtraVars[$obj->module_srl]->admin_mail;
+
+			//save term to mudule table content column
+			if($obj->term) 
+				$obj->content = $obj->term;
+			else 
+				$obj->content = "";
+
+			unset($obj->term);
+
+			//save agree_text to mudule table mcontent column 
+			if($obj->agree_text) 
+				$obj->mcontent = $obj->agree_text;
+			else 
+				$obj->mcontent = "";
+
+			unset($obj->agree_text);
+			
+			$oModuleController = &getController('module');
+
+			if($obj->module_srl) {
+				$output = $oModuleController->updateModule($obj);
+				$msg_code = 'success_updated';
+				// if there is an error, then stop
+				if(!$output->toBool()) return $output;
+			}
+			
+			// return result
+			$this->add('mid', Context::get('mid'));
+
+			// output success inserted/updated message
+			$this->setMessage($msg_code);
+		}
+
     }
 ?>

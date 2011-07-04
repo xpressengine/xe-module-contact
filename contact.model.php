@@ -52,7 +52,7 @@
 			$count = $oSpamModel->getLogCount($interval);
 			
             if($count) {
-                $message = sprintf(Context::getLang('msg_alert_limited_by_config_mail'), $interval);
+                $message = sprintf(Context::getLang('msg_alert_limited_by_config_mail'), $interval/60);
                 $oSpamFilterController = &getController('spamfilter');
                 $oSpamFilterController->insertLog();
 
