@@ -1,0 +1,16 @@
+<!--#include("_header.html")-->
+	<form action="./" method="post" onsubmit="return procFilter(this, send_email)" id="form_contact" >
+		<!--@if($module_info->enable_terms == 'Y')-->
+			<div id="terms">
+				<div class="termsTitle"><h3>Terms of Use Agreement</h3></div>
+				<div id="terms-main">
+					{$module_info->content}
+				</div>
+				<div id="agree_check"><input type="checkbox" id="checkbox" name="check_agree"><label for="checkbox">{$module_info->mcontent}</label></div>
+				</div>
+			</div>
+		<!--@end-->
+		<!--#include("contact_form.html")-->
+	</form>
+<!--#include("_footer.html")-->
+

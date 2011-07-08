@@ -1,0 +1,46 @@
+<script type="text/javascript">
+	jQuery(function($){
+		$('#formComponents input:text').css('width','260px');
+		$('#formComponents textarea').css('width','599px');
+		$('#formComponents textarea').css('height','80px');
+		$('#formComponents textarea').css('font-size','11px');
+		$('#comment_field textarea').css('width','599px');
+		$('#comment_field textarea').css('font-size','11px');
+		$('.comment_textarea textarea').css('height','152px');
+	});
+</script>
+
+<input type="hidden" name="mid" value="{$mid}" />
+<input type="hidden" name="module_srl" value="{$module_info->module_srl}" />
+<div id="contact_form">
+	<div class="formTitle">
+		<p class="text-required">
+			Fields are required<img src="img/bg-star-required.gif">
+		</p>
+	</div>
+	<div id="formComponents">
+		<!--@if(count($form_extra_keys))-->
+		<!--@foreach($form_extra_keys as $key => $val)-->
+		<dl id="form_keys_{$key}">
+		<dt><label>{$val->name}:</label><!--@if($val->is_required=='Y')--><img src="img/bg-star-required.gif"><!--@end--></dt>
+		<dd>{$val->getFormHTML()}</dd>
+		</dl>
+		<!--@endforeach-->
+		<!--@endif-->
+		<dl class="mandatory_field">
+		<dt><label>Subject:</label><img src="img/bg-star-required.gif"></dt>
+		<dd><input class="text" type="text" name="Subject"></dd>
+		</dl>
+
+		<dl class="mandatory_field">
+		<dt><label>Email:</label><img src="img/bg-star-required.gif"></dt>
+		<dd><input class="text" type="text" name="Email"></dd>
+		</dl>
+		<dl class="comment_textarea">
+		<dt><label>Question and Comment:</label><img src="img/bg-star-required.gif"></dt>
+		<dd><textarea class="textarea" name="Comment"></textarea></dd>
+		</dl>		
+		<!--field ( Question )-->
+	</div>
+</div>
+<p class="send"><input type="submit" value="Send"></p>

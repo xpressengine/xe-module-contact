@@ -1,0 +1,12 @@
+<!--#include("_header.html")-->
+<div id="success_form">
+	<h3>Email has been sent successfully.</h3>
+	<div id="mail_content">
+		<ul>
+		<!--@foreach($mail_content as $title => $val)-->
+			<li><strong class="mail_var_title">{$title}:</strong>{$val}</li>
+		<!--@end-->
+		</ul>
+	</div>
+</div>
+<!--#include("_footer.html")-->
