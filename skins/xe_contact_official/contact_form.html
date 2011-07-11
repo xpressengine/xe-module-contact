@@ -1,12 +1,6 @@
 <script type="text/javascript">
 	jQuery(function($){
 		$('#formComponents input:text').css('width','260px');
-		$('#formComponents textarea').css('width','599px');
-		$('#formComponents textarea').css('height','80px');
-		$('#formComponents textarea').css('font-size','11px');
-		$('#comment_field textarea').css('width','599px');
-		$('#comment_field textarea').css('font-size','11px');
-		$('.comment_textarea textarea').css('height','152px');
 	});
 </script>
 
@@ -23,7 +17,7 @@
 		<!--@foreach($form_extra_keys as $key => $val)-->
 		<dl id="form_keys_{$key}">
 		<dt><label>{$val->name}:</label><!--@if($val->is_required=='Y')--><img src="img/bg-star-required.gif"><!--@end--></dt>
-		<dd>{$val->getFormHTML()}</dd>
+		<dd><fieldset><div>{$val->getFormHTML()}</div></fieldset></dd>
 		</dl>
 		<!--@endforeach-->
 		<!--@endif-->
@@ -38,7 +32,7 @@
 		</dl>
 		<dl class="comment_textarea">
 		<dt><label>Question and Comment:</label><img src="img/bg-star-required.gif"></dt>
-		<dd><textarea class="textarea" name="Comment"></textarea></dd>
+		<dd><fieldset><div><textarea class="textarea" name="Comment"></textarea></div></fieldset></dd>
 		</dl>		
 		<!--field ( Question )-->
 	</div>
