@@ -1,12 +1,12 @@
-<!--#include("header.html")-->
+<include target="./header.html" />
 
 {$setup_content}
 
 <script type="text/javascript">
 	jQuery(function($){
-		th = $('th.half_wide div');
-		th_article = th[0]
-		th_comment = th[1];
+		th = $('div#content div.table table thead tr').find('th');
+		th_article = th[1]
+		th_comment = th[2];
 		$(th_comment).hide();
 		$("[name='comment_editor_skin']").hide();
 		$("[name='sel_comment_editor_colorset']").hide();

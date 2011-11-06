@@ -29,11 +29,6 @@
             $oDocumentModel = &getModel('document');
             $form_extra_keys = $oDocumentModel->getExtraKeys($this->module_info->module_srl);
             Context::set('form_extra_keys', $form_extra_keys);
-			
-
-			// load contact.js
-			Context::addJsFile($this->module_path.'tpl/js/contact.js');	
-
 		}
 
         /**

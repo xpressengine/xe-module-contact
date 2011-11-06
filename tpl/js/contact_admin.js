@@ -4,32 +4,12 @@
  * @brief  contact module template javascript
  **/
 
-/* after insert contact us module */
-function completeInsertContact(ret_obj) {
-    var error = ret_obj['error'];
-    var message = ret_obj['message'];
-
-    var page = ret_obj['page'];
-    var module_srl = ret_obj['module_srl'];
-
-    alert(message);
-
-    var url = current_url.setQuery('act','dispContactAdminContactInfo');
-    if(module_srl) url = url.setQuery('module_srl',module_srl);
-    if(page) url.setQuery('page',page);
-    location.href = url;
-}
-
-function completeInsertExtraVar(ret_obj) {
-    alert(ret_obj['message']);
-    location.href = current_url.setQuery('type','').setQuery('selected_var_idx','');
-}
-
 function doDeleteExtraKey(module_srl, var_idx) {
-    var fo_obj = jQuery('#fo_delete')[0];
-    fo_obj.module_srl.value = module_srl;
-    fo_obj.var_idx.value = var_idx;
-    return procFilter(fo_obj, delete_extra_var);
+	var params = {
+		module_srl : module_srl,
+		var_idx    : var_idx
+	}
+	exec_xml('contact', 'procContactAdminDeleteExtraVar', params, function() { location.reload() });
 }
 
 function moveVar(type, module_srl, var_idx) {
@@ -40,18 +20,6 @@ function moveVar(type, module_srl, var_idx) {
 	};
     var response_tags = ['error','message'];
     exec_xml('document','procDocumentAdminMoveExtraVar', params, function() { location.reload() });
-}
-
-/* after delete contact module */
-function completeDeleteContact(ret_obj) {
-    var error = ret_obj['error'];
-    var message = ret_obj['message'];
-    var page = ret_obj['page'];
-    alert(message);
-
-    var url = current_url.setQuery('act','dispContactAdminContent').setQuery('module_srl','');
-    if(page) url = url.setQuery('page',page);
-    location.href = url;
 }
 
 /* mass configuration*/
@@ -67,20 +35,4 @@ function doCartSetup(url) {
     popopen(url,'modulesSetup');
 }
 
-/* after term inserted */
-function completeTermInserted(ret_obj) {
-
-	var error = ret_obj['error'];
-    var message = ret_obj['message'];
-
-    var page = ret_obj['page'];
-    var module_srl = ret_obj['module_srl'];
-
-    alert(message);
-
-    var url = current_url.setQuery('act','dispContactAdminContactAgreement');
-    if(module_srl) url = url.setQuery('module_srl',module_srl);
-    if(page) url.setQuery('page',page);
-    location.href = url;
-}
 

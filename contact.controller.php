@@ -18,8 +18,8 @@ class contactController extends contact {
 	 **/
 	function procContactSendEmail(){
 		$logged_info = Context::get('logged_info');
-		if(!$logged_info)
-			return new Object(-1, 'Only logged user can send an email.');
+		/*if(!$logged_info)
+			return new Object(-1, 'Only logged user can send an email.');*/
 
 		$oMail = new Mail();
 
@@ -27,8 +27,12 @@ class contactController extends contact {
 
 		// get form variables submitted
 		$obj = Context::getRequestVars();
-		if(!$obj->check_agree) return new Object(-1, 'You haven\'t read and agree to the terms of the license agreement.');
+		if($obj->enable_terms == 'Y' && !$obj->check_agree) return new Object(-1, 'You haven\'t read and agree to the terms of the license agreement.');
 
+		$obj->email = $obj->Email;
+		$obj->subject = $obj->Subject;
+		$obj->comment = $obj->Comment;
+		
 		$oDocumentModel = &getModel('document');
 		$extra_keys = $oDocumentModel->getExtraKeys($obj->module_srl);
 
@@ -54,12 +58,11 @@ class contactController extends contact {
 			}
 		}
 
-
 		//if the admin mail is not set, then admin mail equals to admin registered email address
 		if(!count($this->module_info->admin_mail)>0) {
 			$this->module_info->admin_mail = $logged_info->email_address;
 		}
-
+		
 		if(!$oMail->isVaildMailAddress($obj->email)){
 			return new Object(-1, 'Please input your valid email address.');
 		}
@@ -107,12 +110,16 @@ class contactController extends contact {
 			$oSpamController->insertLog();
 		}
 
-
-		$msg_code = 'success_email';
+		$msg_code = 'An email has been sent successfully.';
 		$this->add('mid', Context::get('mid'));
 
 		$this->setMessage($msg_code);
 
+		if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
+			$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'act', 'dispCompleteSendMail','mid', $obj->mid);
+			header('location:'.$returnUrl);
+			return;
+		}
 	}
 
 }

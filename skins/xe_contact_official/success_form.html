@@ -1,12 +1,16 @@
-<!--#include("_header.html")-->
+<include target="_header.html" />
+
+<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+
 <div id="success_form">
-	<h3>Email has been sent successfully.</h3>
 	<div id="mail_content">
 		<ul>
-		<!--@foreach($mail_content as $title => $val)-->
-			<li><strong class="mail_var_title">{$title}:</strong>{$val}</li>
-		<!--@end-->
+			<li loop="$mail_content => $title, $val"><strong class="mail_var_title">{$title}:</strong>{$val}</li>
 		</ul>
 	</div>
+	<div id="link_back_contact"><a href="{getUrl('','mid',$module_info->mid)}">Go Back</a></div>
 </div>
-<!--#include("_footer.html")-->
+
+<include target="_footer.html" />

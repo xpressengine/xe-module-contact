@@ -23,11 +23,11 @@
 	    <action name="dispContactTermWrite" type="view" />
 		<action name="dispCompleteSendMail" type="view" />
 
-		<action name="procContactAdminInsertContact" type="controller" standalone="true" />
-        <action name="procContactAdminInsertExtraVar" type="controller" standalone="true" />
+		<action name="procContactAdminInsertContact" type="controller" standalone="true" ruleset="insertContact"/>
+        <action name="procContactAdminInsertExtraVar" type="controller" standalone="true" ruleset="insertExtraVar"/>
 		<action name="procContactAdminDeleteExtraVar" type="controller" standalone="true" />
-		<action name="procContactAdminDeleteContact" type="controller" standalone="true" />
-		<action name="procContactAdminInsertTerm" type="controller" standalone="true" />
+		<action name="procContactAdminDeleteContact" type="controller" standalone="true" ruleset="deleteContact"/>
+		<action name="procContactAdminInsertTerm" type="controller" standalone="true" ruleset="insertTerm"/>
 		<action name="procContactSendEmail" type="controller" />
 
     </actions>

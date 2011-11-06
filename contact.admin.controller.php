@@ -56,6 +56,11 @@
             $this->add('module_srl',$output->get('module_srl'));
             $this->setMessage($msg_code);
 
+        	if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
+				$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'module', 'admin', 'module_srl', $output->get('module_srl'), 'act', 'dispContactAdminContactInfo');
+				header('location:'.$returnUrl);
+				return;
+			}
         }
 
         /**
@@ -69,7 +74,7 @@
             $default = Context::get('default');
             $desc = Context::get('desc');
 			$eid = Context::get('eid');
-			$name = $eid;
+			$name = Context::get('name');;
 			$search = 'N';
 
             if(!$module_srl || !$eid) return new Object(-1,'msg_invalid_request');
@@ -98,6 +103,11 @@
             if(!$output->toBool()) return $output;
 
             $this->setMessage('success_registed');
+			if($output->toBool() && !in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
+				$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'module', 'admin', 'act', 'dispContactAdminFormComps');
+				$this->setRedirectUrl($returnUrl);
+				return;
+			}
         }
 
         /**
@@ -133,6 +143,12 @@
             $this->add('module','contact');
             $this->add('page',Context::get('page'));
             $this->setMessage('success_deleted');
+
+        	if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
+				$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'module', 'admin', 'module_srl', $output->get('module_srl'), 'act', 'dispContactAdminContent');
+				header('location:'.$returnUrl);
+				return;
+			}
         }
 
 		/**
@@ -141,7 +157,6 @@
 		function procContactAdminInsertTerm() {
 
 			// check permission
-			if($this->module_info->module != "contact") return new Object(-1, "msg_invalid_request");
 			$logged_info = Context::get('logged_info');
 
 			$module_srl = Context::get('module_srl');
@@ -154,13 +169,21 @@
 			$obj->term = $term;
 			$obj->agree_text = $agree_text;
 
-			
 			$oModuleModel = &getModel('module');
 			$mExtraVars = $oModuleModel->getModuleExtraVars($obj->module_srl);
 
 			//get exist extra variables
 			$obj->enable_terms = $mExtraVars[$obj->module_srl]->enable_terms;
 			$obj->admin_mail = $mExtraVars[$obj->module_srl]->admin_mail;
+
+			// if module_srl exists
+            if($obj->module_srl){
+                $module_info = $oModuleModel->getModuleInfoByModuleSrl($obj->module_srl);
+                if($module_info->module_srl != $obj->module_srl) unset($obj->module_srl);
+            }
+
+			if($module_info->module != "contact" || !$obj->module_srl) return new Object(-1, "msg_invalid_request");
+			$obj->module = $module_info->module;
 
 			//save term to mudule table content column
 			if($obj->term) 
@@ -192,6 +215,12 @@
 
 			// output success inserted/updated message
 			$this->setMessage($msg_code);
+
+			if($output->toBool() && !in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
+				$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'module', 'admin', 'act', 'dispContactAdminContactAgreement', 'module_srl', $output->get('module_srl'));
+				$this->setRedirectUrl($returnUrl);
+				return;
+			}
 		}
 
     }
