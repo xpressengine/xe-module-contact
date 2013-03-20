@@ -1,0 +1,107 @@
+<load target="js/contact_admin.js" />
+<load target="js/module_admin.js" />
+
+<!--@if($selected_var_idx && $extra_keys[$selected_var_idx])-->
+    {@ $selected_var = $extra_keys[$selected_var_idx] }
+<!--@end-->
+
+<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+
+
+<form action="./" ruleset="insertExtraVar" method="post" cond="$type == 'insertExtraForm' || $selected_var_idx">
+<input type="hidden" name="act" value="procContactAdminInsertExtraVar" />
+<input type="hidden" name="module_srl" value="{$module_srl}" />
+<input type="hidden" name="var_idx" value="{$selected_var_idx}" />
+<input type="hidden" name="success_return_url" value="{getUrl('', 'module', $module, 'act', $act, 'module_srl', $module_srl)}" />
+
+	<div class="table" id="contact_extra_keys_table">
+		<table width="100%" border="1" cellspacing="0">
+		<tr>
+			<th><div>{$lang->eid}</div></th>
+			<td class="wide">
+				<input type="text" name="eid" value="{$selected_var->eid}" class="inputTypeText w200" id="eid" /><p>{$lang->about_extra_vars_eid_value}</p>
+			</td>
+		</tr>
+		<tr>
+			<th>{$lang->component_name}</th>
+			<td >
+				<input type="text" name="name" value="{$selected_var->name}" id="name" class="inputTypeText w400"/><a href="{getUrl('','module','module','act','dispModuleAdminLangcode','target','name')}" onclick="popopen(this.href);return false;" ><span>{$lang->cmd_find_langcode}</span></a> 
+			</td>
+		</tr>
+		<tr>
+			<th><div>{$lang->input_type}</div></th>
+			<td>
+				<select name="type">
+					<!--@foreach($lang->input_type_list as $k => $v)-->
+						<option value="{$k}" <!--@if($selected_var->type==$k)-->selected="selected"<!--@end-->>{$lang->input_type_list[$k]}</option>
+					<!--@end-->
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th><div>{$lang->is_required}</div></th>
+			<td><input type="checkbox" name="is_required" value="Y" <!--@if($selected_var->is_required=='Y')-->checked="checked"<!--@end--> /></td>
+		</tr>
+		<tr>
+			<th><div>{$lang->default_value}</div></th>
+			<td><input type="text" name="default" value="{$selected_var->default}" class="inputTypeText w400" /><p>{$lang->about_extra_vars_default_value}</p></td>
+		</tr>
+		<tr>
+			<th><div>{$lang->description}</div></th>
+			<td><input type="text" name="desc" value="{$selected_var->desc}" id="desc" class="inputTypeText w400" /><a href="{getUrl('','module','module','act','dispModuleAdminLangcode','target','desc')}" onclick="popopen(this.href);return false;" class="buttonSet buttonSetting"><span>{$lang->cmd_find_langcode}</span></a></td>
+		</tr>
+		</table>
+	</div>
+	<div class="btnArea">
+		<span cond="$selected_var" class="btn"><input type="submit" value="{$lang->cmd_modify}" /></span>
+		<span cond="!$selected_var" class="btn"><input type="submit" value="{$lang->cmd_insert}" /></span>
+		<span class="btn"><a href="{getUrl('type','','selected_var_idx','')}">{$lang->cmd_back}</a></span>
+	</div>
+</form>
+
+<div cond="!($type == 'insertExtraForm' || $selected_var_idx)" class="table">
+	<table cellspacing="0" class="crossTable ">
+	<thead>
+	<tr style="text-align:left">
+		<th>{$lang->no}</th>
+		<th>{$lang->eid}</th>
+		<th>{$lang->input_type}</th>
+		<th>{$lang->is_required}</th>
+		<th>&nbsp;</th>
+	</tr>
+	</thead>
+	<tbody>
+	<block loop="$extra_keys =>$key, $val">
+	<tr>
+		<td rowspan="3">{$val->idx}</td>
+		<td class="nowrap"><b>{$val->name}</b></td>
+		<td class="nowrap">{$lang->column_type_list[$val->type]}</td>
+		<td rowspan="3"><!--@if($val->is_required=='Y')--><b>{$lang->is_required}</b><!--@else-->N<!--@end--></td>
+		<td rowspan="3" class="nowrap">
+			<!--@if($val->idx>1)--><a href="#" onclick="moveVar('up','{$module_srl}','{$val->idx}'); return false;" class="buttonSet buttonUp"><span>{$lang->cmd_up}</span></a><!--@end-->
+			<a href="#" onclick="moveVar('down','{$module_srl}','{$val->idx}');return false;" class="buttonSet buttonDown"><span>{$lang->cmd_down}</a></span>
+			<a href="{getUrl('selected_var_idx',$val->idx)}" class="buttonSet buttonSetting"><span>{$lang->cmd_modify}</span></a>
+			<a href="#" onclick="return doDeleteExtraKey('{$module_srl}','{$val->idx}');" class="buttonSet buttonDelete"><span>{$lang->cmd_delete}</span></a>
+		</td>
+	</tr>
+	<tr>
+		<td>{$lang->default_value}:&nbsp;&nbsp;&nbsp;{$val->default}</td>
+	</tr>
+	<tr>
+		<td colspan="3">{$lang->description}:&nbsp;&nbsp;&nbsp;{$val->desc}</td>
+	</tr>
+	</block>
+	</tbody>
+	</table>
+</div>
+<div cond="!($type == 'insertExtraForm' || $selected_var_idx)" class="btnArea">
+	<span class="btn"><a href="{getUrl('type','insertExtraForm','selected_var_idx','')}">{$lang->cmd_insert}</a></span>
+</div>
+
+
+<form id="fo_delete" name="fo_delete" method="post" action="./">
+<input type="hidden" name="module_srl" value="" />
+<input type="hidden" name="var_idx" value="" />
+</form>

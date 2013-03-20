@@ -1,0 +1,23 @@
+<include target="_header.html" />
+
+<form action="./" method="post" onsubmit="return procFilter(this, insert_term)" id="fo_write" class="faqWrite">
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="term" value="{$termText}" />
+	<input type="hidden" name="module_srl" value="{$module_info->module_srl}" />
+
+	<div class="termsTitle"><h3>Terms of Use Agreement</h3></div>
+	<div class="agree_text">
+		<label class="title"><strong>Agree Text:</strong></label>
+		<input type="text" name="agree_text" class="inputText" value="{$module_info->mcontent}" style="width:500px"/>
+	</div>
+	<br style="line-height:10px;"/>
+	<div id="term_write" style="width:630px">
+		<div class="editor">{$editor_content}</div>
+	</div>
+
+	<div class="boardNavigation1">
+		<span class="button red strong"><input type="submit" value="{$lang->cmd_registration}" accesskey="s" /></span>
+	</div>
+</form>
+
+<include target="_footer.html" />

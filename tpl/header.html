@@ -1,0 +1,24 @@
+<load target="js/contact_admin.js" />
+<load target="css/contact_admin.css" />
+
+
+<h1 class="h1">{$lang->contact_management}</h3>
+<p>{nl2br($lang->about_contact)}</p>
+<h2 cond="$module_info->mid" class="h2">{$module_info->mid} <!--@if($module_info->is_default=='Y')--><span class="bracket">({$lang->is_default})</span><!--@end--> <span class="vr">|</span> <a href="{getSiteUrl($module_info->domain,'','mid',$module_info->mid)}" onclick="window.open(this.href); return false;" class="view">View</a></h2>
+
+
+<div cond="$module_info" class="cnb">
+    <ul>
+        <li cond="$module=='admin'" class="active"|cond="$act=='dispContactAdminContent'"><a href="{getUrl('act','dispContactAdminContent','module_srl','')}">{$lang->cmd_contact_list}</a></li>
+        <li cond="$module!='admin'" ><a href="{getUrl('act','')}">{$lang->cmd_back}</a></li>
+        <li class="active"|cond="$act=='dispContactAdminContactInfo'||$act=='dispContactAdminInsertContact'"><a href="{getUrl('act','dispContactAdminContactInfo','type','')}"><!--@if($module_srl)-->{$lang->cmd_view_info}<!--@else-->{$lang->cmd_create_contact}<!--@end--></a></li>
+
+        <!--@if($module_srl)-->
+        <li class="active"|cond="$act=='dispContactAdminFormComps'"><a href="{getUrl('act','dispContactAdminFormComps','type','')}">{$lang->cmd_form_components}</a></li>
+		<li class="active"|cond="$act=='dispContactAdminContactAgreement'"><a href="{getUrl('act','dispContactAdminContactAgreement','type','')}">{$lang->cmd_agreement}</a></li>
+        <li class="active"|cond="$act=='dispContactAdminContactAdditionSetup'"><a href="{getUrl('act','dispContactAdminContactAdditionSetup','type','')}">{$lang->cmd_addition_setup}</a></li>
+		<!--@end-->
+    </ul>
+</div>
+
+
