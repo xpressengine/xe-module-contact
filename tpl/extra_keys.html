@@ -1,107 +1,102 @@
 <load target="js/contact_admin.js" />
 <load target="js/module_admin.js" />
-
-<!--@if($selected_var_idx && $extra_keys[$selected_var_idx])-->
+<block cond="$selected_var_idx && $extra_keys[$selected_var_idx]">
     {@ $selected_var = $extra_keys[$selected_var_idx] }
-<!--@end-->
-
+</block>
 <div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
-<p>{$XE_VALIDATOR_MESSAGE}</p>
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
 </div>
-
-
-<form action="./" ruleset="insertExtraVar" method="post" cond="$type == 'insertExtraForm' || $selected_var_idx">
-<input type="hidden" name="act" value="procContactAdminInsertExtraVar" />
-<input type="hidden" name="module_srl" value="{$module_srl}" />
-<input type="hidden" name="var_idx" value="{$selected_var_idx}" />
-<input type="hidden" name="success_return_url" value="{getUrl('', 'module', $module, 'act', $act, 'module_srl', $module_srl)}" />
-
-	<div class="table" id="contact_extra_keys_table">
-		<table width="100%" border="1" cellspacing="0">
-		<tr>
-			<th><div>{$lang->eid}</div></th>
-			<td class="wide">
-				<input type="text" name="eid" value="{$selected_var->eid}" class="inputTypeText w200" id="eid" /><p>{$lang->about_extra_vars_eid_value}</p>
-			</td>
-		</tr>
-		<tr>
-			<th>{$lang->component_name}</th>
-			<td >
-				<input type="text" name="name" value="{$selected_var->name}" id="name" class="inputTypeText w400"/><a href="{getUrl('','module','module','act','dispModuleAdminLangcode','target','name')}" onclick="popopen(this.href);return false;" ><span>{$lang->cmd_find_langcode}</span></a> 
-			</td>
-		</tr>
-		<tr>
-			<th><div>{$lang->input_type}</div></th>
-			<td>
-				<select name="type">
-					<!--@foreach($lang->input_type_list as $k => $v)-->
-						<option value="{$k}" <!--@if($selected_var->type==$k)-->selected="selected"<!--@end-->>{$lang->input_type_list[$k]}</option>
-					<!--@end-->
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<th><div>{$lang->is_required}</div></th>
-			<td><input type="checkbox" name="is_required" value="Y" <!--@if($selected_var->is_required=='Y')-->checked="checked"<!--@end--> /></td>
-		</tr>
-		<tr>
-			<th><div>{$lang->default_value}</div></th>
-			<td><input type="text" name="default" value="{$selected_var->default}" class="inputTypeText w400" /><p>{$lang->about_extra_vars_default_value}</p></td>
-		</tr>
-		<tr>
-			<th><div>{$lang->description}</div></th>
-			<td><input type="text" name="desc" value="{$selected_var->desc}" id="desc" class="inputTypeText w400" /><a href="{getUrl('','module','module','act','dispModuleAdminLangcode','target','desc')}" onclick="popopen(this.href);return false;" class="buttonSet buttonSetting"><span>{$lang->cmd_find_langcode}</span></a></td>
-		</tr>
-		</table>
+<form action="./" ruleset="insertExtraVar" method="post" cond="$type == 'insertExtraForm' || $selected_var_idx" class="x_form-horizontal">
+	<input type="hidden" name="act" value="procContactAdminInsertExtraVar" />
+	<input type="hidden" name="module_srl" value="{$module_srl}" />
+	<input type="hidden" name="var_idx" value="{$selected_var_idx}" />
+	<input type="hidden" name="success_return_url" value="{getUrl('', 'module', $module, 'act', $act, 'module_srl', $module_srl)}" />
+	<div class="x_control-group">
+		<label class="x_control-label" for="eid">{$lang->eid}</label>
+		<div class="x_controls">
+			<input type="text" name="eid" value="{$selected_var->eid}" id="eid" />
+			<a href="#about_extra_vars_eid_value" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+			<p id="about_extra_vars_eid_value" class="x_help-block" hidden>{$lang->about_extra_vars_eid_value}</p>
+		</div>
+	</div>
+	<div class="x_control-group">
+		<label class="x_control-label" for="lang_name">{$lang->component_name}</label>
+		<div class="x_controls">
+			<input type="text" name="name" class="lang_code" value="{$selected_var->name}" id="name" /> 
+		</div>
+	</div>
+	<div class="x_control-group">
+		<label class="x_control-label" for="type">{$lang->input_type}</label>
+		<div class="x_controls">
+			<select name="type" id="type">
+				<option loop="$lang->input_type_list => $k,$v" value="{$k}" selected="selected"|cond="$selected_var->type==$k">{$lang->input_type_list[$k]}</option>
+			</select>
+		</div>
+	</div>
+	<div class="x_control-group">
+		<label class="x_control-label" for="is_required">{$lang->is_required}</label>
+		<div class="x_controls">
+			<label for="is_required" class="x_inline">
+				<input type="checkbox" name="is_required" id="is_required" value="Y" checked="checked"|cond="$selected_var->is_required=='Y'" />
+				{$lang->is_required}
+			</label>
+		</div>
+	</div>
+	<div class="x_control-group">
+		<label class="x_control-label" for="default">{$lang->default_value}</label>
+		<div class="x_controls">
+			<input type="text" name="default" id="default" value="{$selected_var->default}" />
+			<a href="#about_extra_vars_default_value" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+			<p id="about_extra_vars_default_value" class="x_help-block" hidden>{$lang->about_extra_vars_default_value}</p>
+		</div>
+	</div>
+	<div class="x_control-group">
+		<label class="x_control-label" for="lang_desc">{$lang->description}</label>
+		<div class="x_controls">
+			<input type="text" name="desc" value="{$selected_var->desc}" id="desc" class="lang_code" />
+		</div>
 	</div>
 	<div class="btnArea">
-		<span cond="$selected_var" class="btn"><input type="submit" value="{$lang->cmd_modify}" /></span>
-		<span cond="!$selected_var" class="btn"><input type="submit" value="{$lang->cmd_insert}" /></span>
-		<span class="btn"><a href="{getUrl('type','','selected_var_idx','')}">{$lang->cmd_back}</a></span>
+		<a href="{getUrl('type','','selected_var_idx','')}" class="x_btn x_pull-left">{$lang->cmd_back}</a>
+		<span>
+			<input cond="$selected_var" class="x_btn x_btn-primary" type="submit" value="{$lang->cmd_modify}" />
+			<input cond="!$selected_var" class="x_btn x_btn-primary" type="submit" value="{$lang->cmd_insert}" />
+		</span>
 	</div>
 </form>
-
-<div cond="!($type == 'insertExtraForm' || $selected_var_idx)" class="table">
-	<table cellspacing="0" class="crossTable ">
+<table cond="!($type == 'insertExtraForm' || $selected_var_idx)" class="x_table x_table-striped x_table-hover ">
 	<thead>
-	<tr style="text-align:left">
-		<th>{$lang->no}</th>
-		<th>{$lang->eid}</th>
-		<th>{$lang->input_type}</th>
-		<th>{$lang->is_required}</th>
-		<th>&nbsp;</th>
-	</tr>
+		<tr>
+			<th>{$lang->no}</th>
+			<th>{$lang->eid}</th>
+			<th>{$lang->input_type}</th>
+			<th>{$lang->default_value}</th>
+			<th>{$lang->description}</th>
+			<th>{$lang->is_required}</th>
+			<th>{$lang->cmd_edit}</th>
+		</tr>
 	</thead>
 	<tbody>
-	<block loop="$extra_keys =>$key, $val">
-	<tr>
-		<td rowspan="3">{$val->idx}</td>
-		<td class="nowrap"><b>{$val->name}</b></td>
-		<td class="nowrap">{$lang->column_type_list[$val->type]}</td>
-		<td rowspan="3"><!--@if($val->is_required=='Y')--><b>{$lang->is_required}</b><!--@else-->N<!--@end--></td>
-		<td rowspan="3" class="nowrap">
-			<!--@if($val->idx>1)--><a href="#" onclick="moveVar('up','{$module_srl}','{$val->idx}'); return false;" class="buttonSet buttonUp"><span>{$lang->cmd_up}</span></a><!--@end-->
-			<a href="#" onclick="moveVar('down','{$module_srl}','{$val->idx}');return false;" class="buttonSet buttonDown"><span>{$lang->cmd_down}</a></span>
-			<a href="{getUrl('selected_var_idx',$val->idx)}" class="buttonSet buttonSetting"><span>{$lang->cmd_modify}</span></a>
-			<a href="#" onclick="return doDeleteExtraKey('{$module_srl}','{$val->idx}');" class="buttonSet buttonDelete"><span>{$lang->cmd_delete}</span></a>
-		</td>
-	</tr>
-	<tr>
-		<td>{$lang->default_value}:&nbsp;&nbsp;&nbsp;{$val->default}</td>
-	</tr>
-	<tr>
-		<td colspan="3">{$lang->description}:&nbsp;&nbsp;&nbsp;{$val->desc}</td>
-	</tr>
-	</block>
+		<tr loop="$extra_keys =>$key, $val">
+			<td>{$val->idx}</td>
+			<td>{$val->name}</td>
+			<td>{$lang->column_type_list[$val->type]}</td>
+			<td>{$val->default}</td>
+			<td>{$val->desc}</td>
+			<td><!--@if($val->is_required=='Y')--><strong>Y</strong><!--@else-->N<!--@end--></td>
+			<td>
+				<button type="button" cond="$val->idx>1" onclick="moveVar('up','{$module_srl}','{$val->idx}')" class="x_icon-arrow-up">{$lang->cmd_up}</button>
+				<button type="button" onclick="moveVar('down','{$module_srl}','{$val->idx}')" class="x_icon-arrow-down">{$lang->cmd_down}</button>
+				<a href="{getUrl('selected_var_idx',$val->idx)}" class="x_icon-wrench">{$lang->cmd_modify}</a>
+				<button type="button" onclick="return doDeleteExtraKey('{$module_srl}','{$val->idx}');" class="x_icon-remove">{$lang->cmd_delete}</button>
+			</td>
+		</tr>
 	</tbody>
-	</table>
+</table>
+<div cond="!($type == 'insertExtraForm' || $selected_var_idx)" class="x_clearfix">
+	<a href="{getUrl('type','insertExtraForm','selected_var_idx','')}" class="x_btn x_btn-inverse x_pull-right">{$lang->cmd_insert}</a>
 </div>
-<div cond="!($type == 'insertExtraForm' || $selected_var_idx)" class="btnArea">
-	<span class="btn"><a href="{getUrl('type','insertExtraForm','selected_var_idx','')}">{$lang->cmd_insert}</a></span>
-</div>
-
-
 <form id="fo_delete" name="fo_delete" method="post" action="./">
-<input type="hidden" name="module_srl" value="" />
-<input type="hidden" name="var_idx" value="" />
+	<input type="hidden" name="module_srl" value="" />
+	<input type="hidden" name="var_idx" value="" />
 </form>
