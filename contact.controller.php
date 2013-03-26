@@ -90,7 +90,7 @@ class contactController extends contact {
 
 		$oMail->setContent(htmlspecialchars($content_all));
 		//$oMail->setSender("XE Contact Us", $obj->email);
-		$oMail->setSender($obj->email, $obj->email);
+		$oMail->setSender($obj->email."(".$_SERVER['REMOTE_ADDR'].")", $obj->email);
 
 		$target_mail = explode(',',$this->module_info->admin_mail);
 
