@@ -66,48 +66,6 @@
 		<value xml:lang="zh-CN"><![CDATA[组件类别]]></value>
 		<value xml:lang="tr"><![CDATA[Bileşen Tipleri]]></value>
 	</item>
-	<item name="input_type_list['text']">
-		<value xml:lang="ko"><![CDATA[텍스트 (text)]]></value>
-		<value xml:lang="en"><![CDATA[One-Line Text]]></value>
-		<value xml:lang="zh-CN"><![CDATA[单行文本框]]></value>
-		<value xml:lang="tr"><![CDATA[Tek Satır Metin]]></value>
-	</item>
-	<item name="input_type_list['textarea']">
-		<value xml:lang="ko"><![CDATA[textarea]]></value>
-		<value xml:lang="en"><![CDATA[Multi-Line Textarea]]></value>
-		<value xml:lang="zh-CN"><![CDATA[多行文本框]]></value>
-		<value xml:lang="tr"><![CDATA[Çok Satırlı Metin Alanı]]></value>
-	</item>
-	<item name="input_type_list['select']">
-		<value xml:lang="ko"><![CDATA[셀렉트박스(select)]]></value>
-		<value xml:lang="en"><![CDATA[Select Box (single selection)]]></value>
-		<value xml:lang="zh-CN"><![CDATA[下拉列表框 (单选)]]></value>
-		<value xml:lang="tr"><![CDATA[Seçim Kutusu (Tek Seçim)]]></value>
-	</item>
-	<item name="input_type_list['checkbox']">
-		<value xml:lang="ko"><![CDATA[체크박스(checkbox)]]></value>
-		<value xml:lang="en"><![CDATA[Checkbox (multiple selection)]]></value>
-		<value xml:lang="zh-CN"><![CDATA[复选框 (多选)]]></value>
-		<value xml:lang="tr"><![CDATA[Seçim Kutusu(Çoklu Seçim)]]></value>
-	</item>
-	<item name="input_type_list['radio']">
-		<value xml:lang="ko"><![CDATA[라디오 버튼(radio)]]></value>
-		<value xml:lang="en"><![CDATA[Radio Button (radio)]]></value>
-		<value xml:lang="zh-CN"><![CDATA[单选框 (单选)]]></value>
-		<value xml:lang="tr"><![CDATA[Radyo Tuşu (Radyo)]]></value>
-	</item>
-	<item name="input_type_list['tel']">
-		<value xml:lang="ko"><![CDATA[전화번호]]></value>
-		<value xml:lang="en"><![CDATA[Phone Number]]></value>
-		<value xml:lang="zh-CN"><![CDATA[电话号码]]></value>
-		<value xml:lang="tr"><![CDATA[Telefon Numarası]]></value>
-	</item>
-	<item name="input_type_list['date']">
-		<value xml:lang="ko"><![CDATA[날짜 (yyyy/mm/dd)]]></value>
-		<value xml:lang="en"><![CDATA[Date (yyyy/mm/dd)]]></value>
-		<value xml:lang="zh-CN"><![CDATA[日期 (yyyy/mm/dd)]]></value>
-		<value xml:lang="tr"><![CDATA[Tarih (gg/aa/yyyy)]]></value>
-	</item>
 	<item name="enable_terms">
 		<value xml:lang="ko"><![CDATA[약관(라이센스) 표시여부]]></value>
 		<value xml:lang="en"><![CDATA[Enable Term]]></value>
