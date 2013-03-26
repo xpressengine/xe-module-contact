@@ -109,8 +109,8 @@
          * @brief display Form Components admin page
          **/
         function dispContactAdminFormComps() {
-            $oContactModel = &getModel('contact');
-            $extra_vars_content = $oContactModel->getFormCompsHTML($this->module_info->module_srl);
+            $oDocumentAdminModel = &getModel('document');
+            $extra_vars_content = $oDocumentAdminModel->getExtraVarsHTML($this->module_info->module_srl);
             Context::set('extra_vars_content', $extra_vars_content);
 
             $this->setTemplateFile('form_comps');

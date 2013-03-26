@@ -13,19 +13,6 @@
 		function init() {
 		}
 
-
-        function getFormCompsHTML($module_srl) {
-			$oDocumentModel = &getModel('document');
-            $extra_keys = $oDocumentModel->getExtraKeys($module_srl);
-            Context::set('extra_keys', $extra_keys);
-
-			$security = new Security();				
-			$security->encodeHTML('extra_keys..name','extra_keys..eid');
-
-            $oTemplate = &TemplateHandler::getInstance();
-            return $oTemplate->compile($this->module_path.'tpl', 'extra_keys');
-        }
-
 		/**
          * @brief return get editor
          **/
@@ -65,5 +52,12 @@
 			return new Object();
         }
 
+		/**
+		 * @brief return module name in sitemap
+		 **/
+		function triggerModuleListInSitemap(&$obj)
+		{
+			array_push($obj, 'contact');
+		}
     }
 ?>

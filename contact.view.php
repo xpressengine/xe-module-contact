@@ -18,7 +18,7 @@
              **/
             $template_path = sprintf("%sskins/%s/",$this->module_path, $this->module_info->skin);
             if(!is_dir($template_path)||!$this->module_info->skin) {
-                $this->module_info->skin = 'xe_contact';
+                $this->module_info->skin = 'xe_contact_official';
                 $template_path = sprintf("%sskins/%s/",$this->module_path, $this->module_info->skin);
             }
             $this->setTemplatePath($template_path);
@@ -75,6 +75,7 @@
 			if(isset($_SESSION['mail_content'])){
 				$mail_content = $_SESSION['mail_content'];
 				Context::set('mail_content',$mail_content);
+				Context::set('mail_title',$_SESSION['mail_title']);
 
 			}else{
 				Context::set('mail_content','');
@@ -98,7 +99,4 @@
 		}
 
     }
-
-
-
 ?>

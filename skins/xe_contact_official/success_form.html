@@ -7,7 +7,7 @@
 <div id="success_form">
 	<div id="mail_content">
 		<ul>
-			<li loop="$mail_content => $title, $val"><strong class="mail_var_title">{$title}:</strong>{$val}</li>
+			<li loop="$mail_content => $title, $val"><strong class="mail_var_title"><block cond="$mail_title[$title]">{$mail_title[$title]}:</block></strong>{$val}</li>
 		</ul>
 	</div>
 	<div id="link_back_contact"><a href="{getUrl('','mid',$module_info->mid)}">Go Back</a></div>

@@ -9,7 +9,7 @@
 		<permission action="procContactAdminInsertContact" target="manager" />
 		<permission action="procContactAdminInsertTerm" target="manager" />
 		
-		<permission action="procContactSendEmail" target="member" />
+		<permission action="procContactSendEmail"/>
     </permissions>
     <actions>
 		<action name="dispContactAdminContent" type="view" standalone="true" admin_index="true" />

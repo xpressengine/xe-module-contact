@@ -3,8 +3,8 @@
     <customrules>
     </customrules>
     <fields>
+		<field name="Subject" required="true" length="1:250"  />
+		<field name="Email" required="true" length="1:200" rule="email" />
 		<field name="Comment" required="true" />
-		<field name="Email" required="true" />
-		<field name="Subject" required="true" />
     </fields>
 </ruleset>
