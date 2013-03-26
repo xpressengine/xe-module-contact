@@ -19,7 +19,7 @@ class contactController extends contact {
 	function procContactSendEmail(){
 		$logged_info = Context::get('logged_info');
 		if($this->module_info->send_grant_all != 'Y' && !$logged_info)
-			return new Object(-1, 'Only logged user can send an email.');
+			return new Object(-1, 'msg_logged_can_send_mail');
 
 		$oMail = new Mail();
 
@@ -27,19 +27,20 @@ class contactController extends contact {
 
 		// get form variables submitted
 		$obj = Context::getRequestVars();
-		if($obj->enable_terms == 'Y' && !$obj->check_agree) return new Object(-1, 'You haven\'t read and agree to the terms of the license agreement.');
+		if($obj->enable_terms == 'Y' && !$obj->check_agree) return new Object(-1, 'msg_terms_of_license_agreement');
 
 		$obj->email = $obj->Email;
 		$obj->subject = $obj->Subject;
 		$obj->comment = $obj->Comment;
-		
+
 		$oDocumentModel = &getModel('document');
 		$extra_keys = $oDocumentModel->getExtraKeys($obj->module_srl);
 
 		$mail_content = array();
-
+		$filter_lang = Context::getLang('filter');
 		$content = '';
 		if(count($extra_keys)) {
+			$oModuleController = &getController('module');
 			foreach($extra_keys as $idx => $extra_item) {
 				$value = '';
 				if(isset($obj->{'extra_vars'.$idx})) $value = $obj->{'extra_vars'.$idx};
@@ -47,28 +48,30 @@ class contactController extends contact {
 				if(!is_array($value)) $value = trim($value);
 				if(!isset($value)) continue;
 				//check if extra item is required
+				$oModuleController->replaceDefinedLangCode($extra_item->name);
 				if($extra_item->is_required == 'Y' && $value==""){
-					return new Object(-1, 'Please input a value for '.$extra_item->name);
+					return new Object(-1, sprintf($filter_lang->invalid,$extra_item->name));
 				}
 				//if the type of form component is email address
 				if($extra_item->type == 'email_address' && !$oMail->isVaildMailAddress($value)){
-					return new Object(-1, 'Please input a valid email for '.$extra_item->name);
+					return new Object(-1, sprintf($filter_lang->invalid_email,$extra_item->name));
 				}
 				if($extra_item->type == "tel")
 				{
 					$mail_content[$extra_item->eid] = $obj->{'extra_vars'.$idx}[2];
-					$content .= $extra_item->eid. ':  ' . $obj->{'extra_vars'.$idx}[2] . "\r\n";
+					$content .= $extra_item->name. ':  ' . $obj->{'extra_vars'.$idx}[2] . "\r\n";
 				}
 				elseif(is_array($obj->{'extra_vars'.$idx}))
 				{
 					$mail_content[$extra_item->eid] = implode(",",$obj->{'extra_vars'.$idx});
-					$content .= $extra_item->eid. ':  ' . implode(",",$obj->{'extra_vars'.$idx}) . "\r\n";
+					$content .= $extra_item->name. ':  ' . implode(",",$obj->{'extra_vars'.$idx}) . "\r\n";
 				}
 				else
 				{
 					$mail_content[$extra_item->eid] = $value;
-					$content .= $extra_item->eid. ':  ' . $value . "\r\n";
+					$content .= $extra_item->name. ':  ' . $value . "\r\n";
 				}
+				$mail_title[$extra_item->eid] = $extra_item->name;
 			}
 		}
 
@@ -76,9 +79,9 @@ class contactController extends contact {
 		if(!count($this->module_info->admin_mail)>0) {
 			$this->module_info->admin_mail = $logged_info->email_address;
 		}
-		
+
 		if(!$oMail->isVaildMailAddress($obj->email)){
-			return new Object(-1, 'Please input your valid email address.');
+			return new Object(-1, sprintf($filter_lang->invalid_email,Context::getLang('email_address')));
 		}
 
 		$oMail->setTitle($obj->subject);
@@ -115,21 +118,19 @@ class contactController extends contact {
 		}
 
 
-		if(isset($_SESSION['mail_content']))
-			unset($_SESSION['mail_content']);
-
+		if(isset($_SESSION['mail_content'])) unset($_SESSION['mail_content']);
+		if(isset($_SESSION['mail_title'])) unset($_SESSION['mail_title']);
 		$_SESSION['mail_content'] = $mail_content;
-
+		$_SESSION['mail_title'] = $mail_title;
 
 		if($logged_info->is_admin != 'Y'){
 			$oSpamController = &getController('spamfilter');
 			$oSpamController->insertLog();
 		}
 
-		$msg_code = 'An email has been sent successfully.';
 		$this->add('mid', Context::get('mid'));
 
-		$this->setMessage($msg_code);
+		$this->setMessage('msg_email_send_successfully');
 
 		if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
 			$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'act', 'dispCompleteSendMail','mid', $obj->mid);

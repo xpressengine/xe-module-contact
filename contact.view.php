@@ -75,6 +75,7 @@
 			if(isset($_SESSION['mail_content'])){
 				$mail_content = $_SESSION['mail_content'];
 				Context::set('mail_content',$mail_content);
+				Context::set('mail_title',$_SESSION['mail_title']);
 
 			}else{
 				Context::set('mail_content','');
