@@ -34,7 +34,7 @@
 	</div>
 	<div id="formComponents">
 		<dl cond="$form_extra_keys" loop="$form_extra_keys => $key, $val" id="form_keys_{$key}">
-		<dt><label>{$val->name}:</label><!--@if($val->is_required=='Y')--><img src="img/bg-star-required.gif"><!--@end--></dt>
+		<dt><label>{htmlspecialchars($val->name)}:</label><!--@if($val->is_required=='Y')--><img src="img/bg-star-required.gif"><!--@end--></dt>
 		<dd><fieldset><div>{$val->getFormHTML()}</div></fieldset></dd>
 		</dl>
 		<dl class="mandatory_field">

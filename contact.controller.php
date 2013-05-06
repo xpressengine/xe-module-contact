@@ -71,7 +71,7 @@ class contactController extends contact {
 					$mail_content[$extra_item->eid] = $value;
 					$content .= $extra_item->name. ':  ' . $value . "\r\n";
 				}
-				$mail_title[$extra_item->eid] = $extra_item->name;
+				$mail_title[$extra_item->eid] = htmlspecialchars($extra_item->name);
 			}
 		}
 

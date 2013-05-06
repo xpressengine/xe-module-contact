@@ -41,6 +41,9 @@
             $template_path = sprintf("%stpl/",$this->module_path);
             $this->setTemplatePath($template_path);
 
+			$oSecurity = new Security();
+			$oSecurity->encodeHTML('module_category..');
+			$oSecurity->encodeHTML('module_info.');
         }
        
 		// display contact module admin panel 
@@ -68,6 +71,9 @@
             Context::set('page', $output->page);
             Context::set('contact_list', $output->data);
             Context::set('page_navigation', $output->page_navigation);
+
+			$oSecurity = new Security();
+			$oSecurity->encodeHTML('contact_list..');
 
             // set template file
             $this->setTemplateFile('index');
@@ -102,6 +108,10 @@
 			Context::set('mlayout_list', $mobile_layout_list);
 
 			$this->setTemplateFile('contact_insert');
+
+			$oSecurity = new Security();
+			$oSecurity->encodeHTML('skin_list..', 'mskin_list..');
+			$oSecurity->encodeHTML('layout_list..', 'mlayout_list..');
  
         }
 
