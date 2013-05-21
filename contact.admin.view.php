@@ -112,6 +112,7 @@
 			$oSecurity = new Security();
 			$oSecurity->encodeHTML('skin_list..', 'mskin_list..');
 			$oSecurity->encodeHTML('layout_list..', 'mlayout_list..');
+			$oSecurity->encodeHTML('module_info.');
  
         }
 
@@ -173,7 +174,7 @@
             /** 
              * add javascript filter file insert_question
              **/
-			$termText = $this->getTermText();
+			$termText = $this->module_info->content;
 			Context::set('termText', $termText);
 
             Context::addJsFilter($this->module_path.'tpl/filter', 'insert_term.xml');
@@ -198,20 +199,11 @@
 
             Context::set('module_info',$module_info);
 
+			$oSecurity->encodeHTML('module_info.');
+
             // set template file
             $this->setTemplateFile('contact_delete');
         }
-
-		function getTermText($strlen = 0) {
-            if(!$this->module_info->module_srl) return;
-
-			$term = $this->module_info->content;
-
-			if($strlen) return cut_str(strip_tags($term),$strlen,'...');
-
-			return htmlspecialchars($term);
-		}
-          
 
     }
 

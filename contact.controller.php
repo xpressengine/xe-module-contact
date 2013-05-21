@@ -86,7 +86,7 @@ class contactController extends contact {
 
 		$oMail->setTitle($obj->subject);
 		$content_all = $content . "\r\nComments:\r\n" . htmlspecialchars($obj->comment);
-		$mail_content['Comments'] = htmlspecialchars($obj->comment);
+		$mail_content['Comments'] = $obj->comment;
 
 		$oMail->setContent(htmlspecialchars($content_all));
 		//$oMail->setSender("XE Contact Us", $obj->email);
