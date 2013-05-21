@@ -18,8 +18,8 @@ class contactController extends contact {
 	 **/
 	function procContactSendEmail(){
 		$logged_info = Context::get('logged_info');
-		if($this->module_info->send_grant_all != 'Y' && !$logged_info)
-			return new Object(-1, 'msg_logged_can_send_mail');
+		if($this->module_info->send_grant_all != 'Y' && !$logged_info) return new Object(-1, 'msg_logged_can_send_mail');
+		if(!$this->module_info->admin_mail) return new Object(-1, 'msg_do_set_admin_mail');
 
 		$oMail = new Mail();
 
@@ -75,10 +75,6 @@ class contactController extends contact {
 			}
 		}
 
-		//if the admin mail is not set, then admin mail equals to admin registered email address
-		if(!count($this->module_info->admin_mail)>0) {
-			$this->module_info->admin_mail = $logged_info->email_address;
-		}
 
 		if(!$oMail->isVaildMailAddress($obj->email)){
 			return new Object(-1, sprintf($filter_lang->invalid_email,Context::getLang('email_address')));
@@ -96,8 +92,7 @@ class contactController extends contact {
 
 		for($i=0;$i<count($target_mail);$i++) {
 			$email_address = trim($target_mail[$i]);
-			if(!$email_address) continue;
-			if(!$oMail->isVaildMailAddress($email_address)) $email_address = $logged_info->email_address;
+			if(!$email_address || !$oMail->isVaildMailAddress($email_address)) continue;
 			$oMail->setReceiptor($email_address, $email_address);
 
 			if($logged_info->is_admin != 'Y'){

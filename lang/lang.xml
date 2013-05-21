@@ -150,4 +150,10 @@
 		<value xml:lang="zh-CN"><![CDATA[组件名称]]></value>
 		<value xml:lang="tr"><![CDATA[Form Bileşenlerinin İsmi]]></value>
 	</item>
+	<item name="msg_do_set_admin_mail">
+		<value xml:lang="ko"><![CDATA[수신 대상이 설정되지 않아 수행 할 수 없습니다. 관리자에게 문의하세요.]]></value>
+		<value xml:lang="en"><![CDATA[The recipient is not set. Please contact your administrator.]]></value>
+		<value xml:lang="zh-CN"><![CDATA[The recipient is not set. Please contact your administrator.]]></value>
+		<value xml:lang="tr"><![CDATA[The recipient is not set. Please contact your administrator.]]></value>
+	</item>
 </lang>
