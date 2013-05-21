@@ -31,7 +31,7 @@
 	<div class="x_control-group">
 		<label class="x_control-label" for="lang_browser_title">{$lang->browser_title}</label>
 		<div class="x_controls">
-			<input type="text" name="browser_title" id="browser_title" class="lang_code" value="{htmlspecialchars($module_info->browser_title)}" />
+			<input type="text" name="browser_title" id="browser_title" class="lang_code" value="<!--@if(strpos($module_info->browser_title, '$user_lang->') === false)-->{$module_info->browser_title}<!--@else-->{htmlspecialchars($module_info->browser_title)}<!--@end-->" />
 			<a href="#about_browser_title" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
 			<p id="about_browser_title" class="x_help-block" hidden>{$lang->about_browser_title}</p>
 		</div>
@@ -69,7 +69,7 @@
 	<div class="x_control-group">
 		<label class="x_control-label" for="admin_mail">{$lang->admin_mail}</label>
 		<div class="x_controls">
-			<input type="email" name="admin_mail" id="admin_mail" value="{$module_info->admin_mail}" />
+			<input type="text" name="admin_mail" id="admin_mail" value="{$module_info->admin_mail}" />
 			<a href="#about_admin_mail" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
 			<p id="about_admin_mail" class="x_help-block" hidden>{$lang->about_admin_mail}</p>
 		</div>
@@ -92,7 +92,7 @@
 	<div class="x_control-group">
 		<label class="x_control-label" for="description">{$lang->description}</label>
 		<div class="x_controls">
-			<textarea name="description" id="description" rows="4" cols="42" style="vertical-align:top">{htmlspecialchars($module_info->description)}</textarea>
+			<textarea name="description" id="description" rows="4" cols="42" style="vertical-align:top">{$module_info->description}</textarea>
 			<a href="#about_description" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
 			<p id="about_description" class="x_help-block" hidden>{$lang->about_description}</p>
 		</div>
