@@ -199,6 +199,7 @@
 
             Context::set('module_info',$module_info);
 
+			$oSecurity = new Security();
 			$oSecurity->encodeHTML('module_info.');
 
             // set template file
