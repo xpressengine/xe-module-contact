@@ -33,14 +33,14 @@ class contactController extends contact {
 		$obj->subject = $obj->Subject;
 		$obj->comment = $obj->Comment;
 
-		$oDocumentModel = &getModel('document');
+		$oDocumentModel = getModel('document');
 		$extra_keys = $oDocumentModel->getExtraKeys($obj->module_srl);
 
 		$mail_content = array();
 		$filter_lang = Context::getLang('filter');
 		$content = '';
 		if(count($extra_keys)) {
-			$oModuleController = &getController('module');
+			$oModuleController = getController('module');
 			foreach($extra_keys as $idx => $extra_item) {
 				$value = '';
 				if(isset($obj->{'extra_vars'.$idx})) $value = $obj->{'extra_vars'.$idx};
@@ -97,13 +97,13 @@ class contactController extends contact {
 
 			if($logged_info->is_admin != 'Y'){
 				if($this->module_info->module_srl){
-					$oModuleModel = &getModel('module');
+					$oModuleModel = getModel('module');
 					$moduleExtraVars = $oModuleModel->getModuleExtraVars($this->module_info->module_srl);
 					if($moduleExtraVars[$this->module_info->module_srl]->interval){
 						$interval = $moduleExtraVars[$this->module_info->module_srl]->interval;
 						//transfer interval to mins
 						$interval = $interval*60;
-						$oContactModel = &getModel('contact');
+						$oContactModel = getModel('contact');
 						$output = $oContactModel->checkLimited($interval);	
 						if(!$output->toBool()) return $output;
 					}
@@ -119,7 +119,7 @@ class contactController extends contact {
 		$_SESSION['mail_title'] = $mail_title;
 
 		if($logged_info->is_admin != 'Y'){
-			$oSpamController = &getController('spamfilter');
+			$oSpamController = getController('spamfilter');
 			$oSpamController->insertLog();
 		}
 

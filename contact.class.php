@@ -14,8 +14,8 @@
          **/
         function moduleInstall() {
             // action forward get module controller and model
-            $oModuleController = &getController('module');
-            $oModuleModel = &getModel('module');
+            $oModuleController = getController('module');
+            $oModuleModel = getModel('module');
 
 			$oModuleController->insertTrigger('member.getMemberMenu', 'contact', 'controller', 'triggerMemberMenu', 'after');
 			$oModuleController->insertTrigger('menu.getModuleListInSitemap', 'contact', 'model', 'triggerModuleListInSitemap', 'after');
@@ -27,7 +27,7 @@
          * @brief check update method
          **/
         function checkUpdate() {
-            $oModuleModel = &getModel('module');
+            $oModuleModel = getModel('module');
 			if(!$oModuleModel->getTrigger('member.getMemberMenu', 'contact', 'controller', 'triggerMemberMenu', 'after')) return true;
 
 			// 2012. 09. 11 when add new menu in sitemap, custom menu add
@@ -40,8 +40,8 @@
          * @brief update module
          **/
         function moduleUpdate() {
-            $oModuleModel = &getModel('module');
-            $oModuleController = &getController('module');
+            $oModuleModel = getModel('module');
+            $oModuleController = getController('module');
 
 			if(!$oModuleModel->getTrigger('member.getMemberMenu', 'contact', 'controller', 'triggerMemberMenu', 'after'))
                 $oModuleController->insertTrigger('member.getMemberMenu', 'contact', 'controller', 'triggerMemberMenu', 'after');

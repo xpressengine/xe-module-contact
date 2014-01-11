@@ -20,13 +20,13 @@
 
             if(!$module_srl) $module_srl = Context::get('module_srl');
 
-            $oEditorModel = &getModel('editor');
+            $oEditorModel = getModel('editor');
 
             return $oEditorModel->getModuleEditor('document', $module_srl, $module_srl, 'module_srl', 'term');
         }
 
 		function getFormCompsCount($module_srl) {
-			$oDocumentAdminModel = &getModel('document');
+			$oDocumentAdminModel = getModel('document');
             $extra_keys = $oDocumentAdminModel->getExtraKeys($module_srl);
 
             return count($extra_keys);
@@ -38,12 +38,12 @@
         function checkLimited($interval) {
 			if(!$interval) return new Object();
 
-			$oSpamModel = &getModel('spamfilter');
+			$oSpamModel = getModel('spamfilter');
 			$count = $oSpamModel->getLogCount($interval);
 			
             if($count) {
                 $message = sprintf(Context::getLang('msg_alert_limited_by_config_mail'), $interval/60);
-                $oSpamFilterController = &getController('spamfilter');
+                $oSpamFilterController = getController('spamfilter');
                 $oSpamFilterController->insertLog();
 
                 return new Object(-1, $message);

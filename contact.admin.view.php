@@ -16,7 +16,7 @@
             }
 
             // module model class
-            $oModuleModel = &getModel('module');
+            $oModuleModel = getModel('module');
 
             // get module_info based on module_srl
             if($module_srl) {
@@ -92,7 +92,7 @@
             }
 
 			//get skin list
-			$oModuleModel = &getModel('module');
+			$oModuleModel = getModel('module');
             $skin_list = $oModuleModel->getSkins($this->module_path);
             Context::set('skin_list',$skin_list);
 
@@ -100,7 +100,7 @@
 			Context::set('mskin_list', $mskin_list);
 
 			//get layout list
-            $oLayoutModel = &getModel('layout');
+            $oLayoutModel = getModel('layout');
             $layout_list = $oLayoutModel->getLayoutList();
             Context::set('layout_list', $layout_list);
 
@@ -120,7 +120,7 @@
          * @brief display Form Components admin page
          **/
         function dispContactAdminFormComps() {
-            $oDocumentAdminModel = &getModel('document');
+            $oDocumentAdminModel = getModel('document');
             $extra_vars_content = $oDocumentAdminModel->getExtraVarsHTML($this->module_info->module_srl);
             Context::set('extra_vars_content', $extra_vars_content);
 
@@ -133,7 +133,7 @@
         function dispContactAdminContactAdditionSetup() {
 
 			$content = '';
-            $oModuleModel = &getModel('module');
+            $oModuleModel = getModel('module');
             $triggers = $oModuleModel->getTriggers('module.dispAdditionSetup', 'before');
 
 			foreach($triggers as $item) {
@@ -142,7 +142,7 @@
                 $called_method = $item->called_method;
 				if($module == 'editor'){ //only display edtior
 					$oModule = null;
-					$oModule = &getModule($module, $type);
+					$oModule = getModule($module, $type);
 					if(!$oModule || !method_exists($oModule, $called_method)) continue;
 
 					$output = $oModule->{$called_method}($content);
@@ -167,7 +167,7 @@
             $logged_info = Context::get('logged_info');
             if($logged_info->is_admin != 'Y') return $this->setTemplateFile('input_password_form');
 
-			$oContactModel = &getModel('contact');
+			$oContactModel = getModel('contact');
 			$editor_content = $oContactModel->getEditor($this->module_info->module_srl);
 			Context::set('editor_content', $editor_content);
 
@@ -193,7 +193,7 @@
 
             $module_info = Context::get('module_info');
 
-            $oContactModel = &getModel('contact');
+            $oContactModel = getModel('contact');
             $components_count = $oContactModel->getFormCompsCount($module_info->module_srl);
 			$module_info->components_count = $components_count;
 

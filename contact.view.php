@@ -36,7 +36,7 @@
 			/**
 			 * get extra variables from xe_document_extra_keys table, context set
 			 **/
-			$oDocumentModel = &getModel('document');
+			$oDocumentModel = getModel('document');
 			$form_extra_keys = $oDocumentModel->getExtraKeys($this->module_info->module_srl);
 			Context::set('form_extra_keys', $form_extra_keys);
 

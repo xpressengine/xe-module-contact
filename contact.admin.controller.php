@@ -18,8 +18,8 @@
          **/
         function procContactAdminInsertContact($args = null) {
             // get module model/module controller
-            $oModuleController = &getController('module');
-            $oModuleModel = &getModel('module');
+            $oModuleController = getController('module');
+            $oModuleModel = getModel('module');
 
             // get variables from admin page form
             $args = Context::getRequestVars();
@@ -98,7 +98,7 @@
             }
 
             // insert or update
-            $oDocumentController = &getController('document');
+            $oDocumentController = getController('document');
             $output = $oDocumentController->insertDocumentExtraKey($module_srl, $var_idx, $name, $type, $is_required, $search, $default, $desc, $eid);
             if(!$output->toBool()) return $output;
 
@@ -118,7 +118,7 @@
             $var_idx = Context::get('var_idx');
             if(!$module_srl || !$var_idx) return new Object(-1,'msg_invalid_request');
 
-            $oDocumentController = &getController('document');
+            $oDocumentController = getController('document');
             $output = $oDocumentController->deleteDocumentExtraKeys($module_srl, $var_idx);
             if(!$output->toBool()) return $output;
 
@@ -133,10 +133,10 @@
 
 			$obj->module_srl = $module_srl;
 			
-			$oDoumentController = &getController('document');
+			$oDoumentController = getController('document');
 			$oDoumentController->deleteDocumentExtraKeys($obj->module_srl);
 
-            $oModuleController = &getController('module');
+            $oModuleController = getController('module');
             $output = $oModuleController->deleteModule($module_srl);
             if(!$output->toBool()) return $output;
 
@@ -169,7 +169,7 @@
 			$obj->term = $term;
 			$obj->agree_text = $agree_text;
 
-			$oModuleModel = &getModel('module');
+			$oModuleModel = getModel('module');
 			$mExtraVars = $oModuleModel->getModuleExtraVars($obj->module_srl);
 
 			//get exist extra variables
@@ -200,8 +200,8 @@
 				$obj->mcontent = "";
 
 			unset($obj->agree_text);
-			
-			$oModuleController = &getController('module');
+
+			$oModuleController = getController('module');
 
 			if($obj->module_srl) {
 				$output = $oModuleController->updateModule($obj);
